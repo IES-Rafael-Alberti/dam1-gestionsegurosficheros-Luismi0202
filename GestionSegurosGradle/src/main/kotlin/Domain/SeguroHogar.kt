@@ -5,6 +5,7 @@ class SeguroHogar(
     dniTitular:String,
     importe:Double,
     val metrosCuadrados:Int,
+    val valorContenido: Double,
     val direccion: String
 ): Seguro(numPoliza,dniTitular,importe) {
 
@@ -21,7 +22,7 @@ class SeguroHogar(
     }
 
     override fun serializar(): String {
-        return "$id;$dniTitular;$numPoliza;$importe;$metrosCuadrados;$direccion;${tipoSeguro()}"
+        return "$id;$dniTitular;$numPoliza;$importe;$valorContenido;$metrosCuadrados;$direccion;${tipoSeguro()}"
     }
 
     companion object{

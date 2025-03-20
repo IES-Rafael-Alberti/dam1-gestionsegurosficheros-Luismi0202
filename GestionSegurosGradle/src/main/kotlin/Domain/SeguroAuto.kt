@@ -9,6 +9,7 @@ class SeguroAuto(
     val descripcion: String,
     val combustible: String,
     val tipoAuto: TipoAutomovil,
+    val tipoCobertura: String,
     val asistenciaCarretera: Boolean,
     val numPartes: Int
 ):Seguro(numPoliza,dniTitular,importe) {
@@ -26,7 +27,7 @@ class SeguroAuto(
     }
 
     override fun serializar(): String {
-        return "$id;$dniTitular;$numPoliza;$importe;$descripcion;$combustible;$tipoAuto;$asistenciaCarretera;$numPartes"
+        return "$id;$dniTitular;$numPoliza;$importe;$descripcion;$combustible;$tipoAuto;$tipoCobertura;$asistenciaCarretera;$numPartes;${tipoSeguro()}"
     }
 
     companion object{

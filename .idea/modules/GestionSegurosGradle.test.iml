@@ -2,7 +2,7 @@
 <module external.linked.project.id="GestionSegurosGradle:test" external.linked.project.path="$MODULE_DIR$/../../GestionSegurosGradle" external.root.project.path="$MODULE_DIR$/../../GestionSegurosGradle" external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
-      <configuration version="5" platform="JVM 22" allPlatforms="JVM [22]" useProjectSettings="false" pureKotlinSourceFolders="C:\Users\maicr\Documents\Git\dam1-gestionsegurosficheros-Luismi0202\GestionSegurosGradle\src\main\kotlin;C:\Users\maicr\Documents\Git\dam1-gestionsegurosficheros-Luismi0202\GestionSegurosGradle\src\test\kotlin">
+      <configuration version="5" platform="JVM 21" allPlatforms="JVM [21]" useProjectSettings="false" pureKotlinSourceFolders="C:\Users\maicr\Documents\Git\dam1-gestionsegurosficheros-Luismi0202\GestionSegurosGradle\src\main\kotlin;C:\Users\maicr\Documents\Git\dam1-gestionsegurosficheros-Luismi0202\GestionSegurosGradle\src\test\kotlin">
         <additionalVisibleModuleNames>GestionSegurosGradle:main</additionalVisibleModuleNames>
         <compilerSettings />
         <compilerArguments>
@@ -13,7 +13,7 @@
           </flagArguments>
           <stringArguments>
             <stringArg name="destination" arg="$MODULE_DIR$/../../GestionSegurosGradle/build/classes/kotlin/test" />
-            <stringArg name="jvmTarget" arg="22" />
+            <stringArg name="jvmTarget" arg="21" />
             <stringArg name="moduleName" arg="GestionSegurosGradle_test" />
             <stringArg name="apiVersion" arg="2.0" />
             <stringArg name="languageVersion" arg="2.0" />
@@ -46,6 +46,7 @@
     <orderEntry type="module" module-name="GestionSegurosGradle.main" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:2.0.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:2.0.21" level="project" />
+    <orderEntry type="library" name="Gradle: org.mindrot:jbcrypt:0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-junit5:2.0.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.10.1" level="project" />
