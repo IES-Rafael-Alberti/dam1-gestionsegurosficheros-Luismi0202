@@ -54,7 +54,7 @@ class SeguroAuto : Seguro {
     }
 
     override fun serializar(): String {
-        return super.serializar() + ";$descripcion;$combustible;$tipoAuto;$tipoCobertura;$asistenciaCarretera;$numPartes"
+        return super.serializar() + ";$descripcion;$combustible;$tipoAuto;$tipoCobertura;$asistenciaCarretera;$numPartes;${tipoSeguro()}"
     }
 
     override fun toString(): String {

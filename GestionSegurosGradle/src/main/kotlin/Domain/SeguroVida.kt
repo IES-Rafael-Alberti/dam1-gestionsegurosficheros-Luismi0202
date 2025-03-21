@@ -10,7 +10,6 @@ class SeguroVida : Seguro {
     private val nivelRiesgo: TipoRiesgo
     private val indemnizacion: Double
 
-    // Secondary constructor for creating a new insurance policy
     constructor(
         dniTitular: String,
         importe: Double,
@@ -21,7 +20,7 @@ class SeguroVida : Seguro {
         aumentarId()
     }
 
-    // Secondary constructor for creating an existing insurance policy
+
     private constructor(
         numPoliza: Int,
         dniTitular: String,
