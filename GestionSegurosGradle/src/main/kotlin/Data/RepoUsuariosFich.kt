@@ -42,6 +42,7 @@ class RepoUsuariosFich : IRepoUsuarios {
         return try {
             File(filePath).readLines().map { Utils.deserializarUsuario(it) }
         } catch (e: Exception) {
+            println("¡Error! Detalle: $e")
             emptyList()
         }
     }

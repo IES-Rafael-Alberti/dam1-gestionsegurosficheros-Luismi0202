@@ -1,5 +1,0 @@
-package Presentacion
-
-
-class ConsolaUI {
-}

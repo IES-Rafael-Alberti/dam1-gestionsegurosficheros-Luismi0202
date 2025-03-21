@@ -2,7 +2,7 @@ package Domain
 
 import java.time.LocalDate
 
-class SeguroHogar : Seguro {
+open class SeguroHogar : Seguro {
     val metrosCuadrados: Int
     val valorContenido: Double
     val direccion: String
@@ -20,7 +20,7 @@ class SeguroHogar : Seguro {
         aumentarId()
     }
 
-    private constructor(
+    internal constructor(
         numPoliza: Int,
         dniTitular: String,
         importe: Double,

@@ -5,7 +5,7 @@ import EnumClasificatorias.TipoRiesgo.Companion.interes
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class SeguroVida : Seguro {
+open class SeguroVida : Seguro {
     private val fechaNac: LocalDate
     private val nivelRiesgo: TipoRiesgo
     private val indemnizacion: Double
@@ -21,7 +21,7 @@ class SeguroVida : Seguro {
     }
 
 
-    private constructor(
+    internal constructor(
         numPoliza: Int,
         dniTitular: String,
         importe: Double,

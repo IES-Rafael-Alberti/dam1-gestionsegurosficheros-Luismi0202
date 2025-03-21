@@ -2,7 +2,7 @@ package Domain
 
 import EnumClasificatorias.TipoAutomovil
 
-class SeguroAuto : Seguro {
+open class SeguroAuto : Seguro {
     private val descripcion: String
     private val combustible: String
     private val tipoAuto: TipoAutomovil
@@ -24,7 +24,7 @@ class SeguroAuto : Seguro {
     }
 
 
-    private constructor(
+    internal constructor(
         numPoliza: Int,
         dniTitular: String,
         importe: Double,

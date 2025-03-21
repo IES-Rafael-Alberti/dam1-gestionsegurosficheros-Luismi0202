@@ -38,27 +38,17 @@ class Usuario(
             return false
         }
 
-        fun crearUsuario(datos:List<String>): Usuario?{
-            try {
+        fun crearUsuario(datos: List<String>): Usuario {
+            val perfil = TipoPerfil.getPerfil(datos[2])
+                ?: throw Exception("El perfil no puede ser nulo")
 
-                if(TipoPerfil.getPerfil(datos[2]) == null){
-                    throw Exception("El perfil no puede ser nulo")
-                }
-
-                if(existeNombre(datos[0])){
-                    throw Exception("El nombre introducido ya está en uso por otro usuario")
-                }
-
-                else{
-                    val perfil = TipoPerfil.getPerfil(datos[2])!! //ya está controlado
-                    val usuario = Usuario(datos[0], datos[1], perfil)
-                    usuariosCreados.add(usuario)
-                    return usuario
-                }
-            }catch(e: Exception){
-                println("¡Error! $e")
+            if (existeNombre(datos[0])) {
+                throw Exception("El nombre introducido ya está en uso por otro usuario")
             }
-            return null
+
+            val usuario = Usuario(datos[0], datos[1], perfil)
+            usuariosCreados.add(usuario)
+            return usuario
         }
     }
 }
