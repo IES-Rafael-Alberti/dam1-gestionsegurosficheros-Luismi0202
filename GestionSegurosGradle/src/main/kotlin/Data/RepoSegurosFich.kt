@@ -12,9 +12,9 @@ class RepoSegurosFich : IRepoSeguros {
     private val filePath = "GestionSegurosGradle/src/main/kotlin/FicherosTexto/Seguros.txt"
 
     val mapaSeguros: Map<String, (List<String>) -> Seguro> = mapOf(
-        "SeguroHogar" to { datos -> SeguroHogar(0, datos[0], datos[1].toDouble(), datos[2].toInt(), datos[3].toDouble(), datos[4], datos[5].toInt()) },
-        "SeguroAuto" to { datos -> SeguroAuto(0, datos[0], datos[1].toDouble(), datos[2], datos[3], TipoAutomovil.valueOf(datos[4]), datos[5], datos[6].toBoolean(), datos[7].toInt()) },
-        "SeguroVida" to { datos -> SeguroVida(0, datos[0], datos[1].toDouble(), datos[2], TipoRiesgo.valueOf(datos[3]), datos[4].toDouble()) }
+        "SeguroHogar" to { datos -> SeguroHogar(datos[0].toInt(),datos[1],datos[2].toDouble(), datos[3].toInt(), datos[4].toDouble(), datos[5], datos[6].toInt()) },
+        "SeguroAuto" to { datos -> SeguroAuto(datos[0].toInt(),datos[1], datos[1].toDouble(), datos[2], datos[3], TipoAutomovil.valueOf(datos[4]), datos[5], datos[6].toBoolean(), datos[7].toInt()) },
+        "SeguroVida" to { datos -> SeguroVida(datos[0].toInt(),datos[1], datos[1].toDouble(), datos[2], TipoRiesgo.valueOf(datos[3]), datos[4].toDouble()) }
     )
 
     val seguros = Utils.leerSeguros(filePath,mapaSeguros)

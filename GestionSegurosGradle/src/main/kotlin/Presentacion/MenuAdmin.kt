@@ -173,7 +173,7 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
         ui.mostrar("Introduzca el año de construcción")
         val anioConstruccion = ui.recibirEntrada().toInt()
 
-        val seguro = SeguroHogar(0, dni, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
+        val seguro = SeguroHogar(dni, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
         if (servSeguros.contratarSeguro(seguro)) {
             ui.mostrar("Seguro de hogar contratado exitosamente")
         } else {
@@ -206,7 +206,7 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
         ui.mostrar("Introduzca el número de partes")
         val numPartes = ui.recibirEntrada().toInt()
 
-        val seguro = SeguroAuto(0, dni, importe, descripcion, combustible, tipoAuto, tipoCobertura, asistenciaCarretera, numPartes)
+        val seguro = SeguroAuto(dni, importe, descripcion, combustible, tipoAuto, tipoCobertura, asistenciaCarretera, numPartes)
         if (servSeguros.contratarSeguro(seguro)) {
             ui.mostrar("Seguro de auto contratado exitosamente")
         } else {
@@ -230,7 +230,7 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
         ui.mostrar("Introduzca la indemnización")
         val indemnizacion = ui.recibirEntrada().toDouble()
 
-        val seguro = SeguroVida(0, dni, importe, fechaNac, nivelRiesgo, indemnizacion)
+        val seguro = SeguroVida(dni, importe, fechaNac, nivelRiesgo, indemnizacion)
 
         if (servSeguros.contratarSeguro(seguro)) {
             ui.mostrar("Seguro de vida contratado exitosamente")

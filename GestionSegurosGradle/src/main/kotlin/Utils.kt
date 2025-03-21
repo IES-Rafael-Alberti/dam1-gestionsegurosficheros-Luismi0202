@@ -3,7 +3,6 @@ import Domain.SeguroAuto
 import Domain.SeguroHogar
 import Domain.SeguroVida
 import Domain.Usuario
-import Interfaces.IExportable
 import java.io.File
 
 object Utils {
@@ -49,24 +48,6 @@ object Utils {
             val tipo = datos.last()
             val creadorSeguro = mapaSeguros[tipo]
             creadorSeguro?.invoke(datos)
-        }
-    }
-
-    fun agregarLinea(ruta: String, linea: String): Boolean {
-        return try {
-            File(ruta).appendText("$linea\n")
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
-
-    fun <T: IExportable> escribirArchivo(ruta: String, elementos: List<T>): Boolean {
-        return try {
-            File(ruta).writeText(elementos.joinToString("\n") { it.serializar() })
-            true
-        } catch (e: Exception) {
-            false
         }
     }
 
