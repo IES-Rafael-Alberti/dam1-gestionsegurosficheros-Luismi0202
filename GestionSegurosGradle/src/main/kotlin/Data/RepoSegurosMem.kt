@@ -10,7 +10,7 @@ class RepoSegurosMem : IRepoSeguros {
     }
 
     override fun buscar(numPoliza: Int): Seguro? {
-        return seguros.find { it.numPoliza == numPoliza }
+        return seguros.find { it.getNumPoliza() == numPoliza }
     }
 
     override fun eliminar(seguro: Seguro): Boolean {

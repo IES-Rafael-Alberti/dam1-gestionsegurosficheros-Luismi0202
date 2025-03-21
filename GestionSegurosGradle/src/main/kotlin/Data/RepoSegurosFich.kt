@@ -16,12 +16,12 @@ class RepoSegurosFich : IRepoSeguros {
     }
 
     override fun buscar(numPoliza: Int): Seguro? {
-        return obtenerTodos().find { it.numPoliza == numPoliza }
+        return obtenerTodos().find { it.getNumPoliza() == numPoliza }
     }
 
     override fun eliminar(seguro: Seguro): Boolean {
         val seguros = obtenerTodos().toMutableList()
-        val result = seguros.removeIf { it.numPoliza == seguro.numPoliza }
+        val result = seguros.removeIf { it.getNumPoliza() == seguro.getNumPoliza() }
         if (result) {
             guardarSeguros(seguros)
         }
@@ -30,7 +30,7 @@ class RepoSegurosFich : IRepoSeguros {
 
     override fun eliminar(numPoliza: Int): Boolean {
         val seguros = obtenerTodos().toMutableList()
-        val result = seguros.removeIf { it.numPoliza == numPoliza }
+        val result = seguros.removeIf { it.getNumPoliza() == numPoliza }
         if (result) {
             guardarSeguros(seguros)
         }

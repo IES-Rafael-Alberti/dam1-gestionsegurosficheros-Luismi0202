@@ -14,6 +14,10 @@ abstract class Seguro(
         require(comprobarDni(dniTitular)){"¡El DNI del titular debe tener un formato correcto!"}
     }
 
+    fun getNumPoliza():Int{
+        return numPoliza
+    }
+
     abstract fun calcularImporteAnioSiguiente(interes: Double):Double
 
     abstract fun tipoSeguro(): String
@@ -41,5 +45,6 @@ abstract class Seguro(
             val regex = Regex("^\\d{8}[A-Z]\$")
             return regex.matches(dni)
         }
+
     }
 }
