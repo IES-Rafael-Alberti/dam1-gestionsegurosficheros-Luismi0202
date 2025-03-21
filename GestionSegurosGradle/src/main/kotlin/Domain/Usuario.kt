@@ -1,4 +1,5 @@
 package Domain
+
 import org.mindrot.jbcrypt.BCrypt
 import EnumClasificatorias.TipoPerfil
 import Interfaces.IExportable
@@ -7,18 +8,16 @@ class Usuario(
     val nombre: String,
     private var contrasenia: String,
     val perfil: TipoPerfil
-): IExportable {
+) : IExportable {
 
+    var contraseniaEncriptada: String = BCrypt.hashpw(contrasenia, BCrypt.gensalt())
 
-    var contraseniaEncriptada = BCrypt.hashpw(contrasenia, BCrypt.gensalt())
-
-    fun verificarClave(claveEncriptada: String): Boolean{
-        val coincide = BCrypt.checkpw(contrasenia, claveEncriptada)
-        return coincide
+    fun verificarClave(clave: String): Boolean {
+        return BCrypt.checkpw(clave, contraseniaEncriptada)
     }
 
-    fun cambiarClave(nuevaClaveEncriptada:String){
-        contrasenia = nuevaClaveEncriptada
+    fun cambiarClave(nuevaClave: String) {
+        contrasenia = nuevaClave
         contraseniaEncriptada = BCrypt.hashpw(contrasenia, BCrypt.gensalt())
     }
 
@@ -26,29 +25,30 @@ class Usuario(
         return "$nombre;$contraseniaEncriptada;$perfil"
     }
 
-    companion object{
+    companion object {
         val usuariosCreados: MutableList<Usuario> = mutableListOf()
 
-        private fun existeNombre(nombreNuevo:String):Boolean{
-            for(usuario in usuariosCreados){
-                if(usuario.nombre == nombreNuevo){
-                    return true
-                }
-            }
-            return false
+        private fun existeNombre(nombreNuevo: String): Boolean {
+            return usuariosCreados.any { it.nombre == nombreNuevo }
         }
 
-        fun crearUsuario(datos: List<String>): Usuario {
-            val perfil = TipoPerfil.getPerfil(datos[2])
-                ?: throw Exception("El perfil no puede ser nulo")
+        fun crearUsuario(datos: List<String>,crear:Boolean=true): Usuario? {
+            return try {
+                if (datos.size < 3) throw IllegalArgumentException("Datos insuficientes para crear el usuario")
 
-            if (existeNombre(datos[0])) {
-                throw Exception("El nombre introducido ya está en uso por otro usuario")
+                val perfil = TipoPerfil.getPerfil(datos[2]) ?: throw IllegalArgumentException("El perfil no puede ser nulo")
+
+                if (existeNombre(datos[0]) && crear) {
+                    throw IllegalArgumentException("El nombre introducido ya está en uso por otro usuario")
+                }
+
+                val usuario = Usuario(datos[0], datos[1], perfil)
+                usuariosCreados.add(usuario)
+                usuario
+            } catch (e: Exception) {
+                println("¡Error! $e")
+                null
             }
-
-            val usuario = Usuario(datos[0], datos[1], perfil)
-            usuariosCreados.add(usuario)
-            return usuario
         }
     }
 }

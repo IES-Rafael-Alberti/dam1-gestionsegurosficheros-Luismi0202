@@ -5,8 +5,10 @@ import Domain.Usuario
 import EnumClasificatorias.TipoPerfil
 
 class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
+
     override fun autenticarUsuario(nombre: String, contrasena: String): Usuario? {
         val usuario = repoUsuarios.buscarUsuario(nombre)
+
         return if (usuario != null && usuario.verificarClave(contrasena)) usuario else null
     }
 
@@ -16,6 +18,7 @@ class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
             return false
         }
         val usuario = Usuario(nombre, contrasena, perfilEnum)
+
         return if (repoUsuarios.agregarUsuario(usuario)) {
             Usuario.usuariosCreados.add(usuario)
             true
@@ -26,6 +29,7 @@ class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
 
     override fun eliminarUsuario(nombre: String): Boolean {
         val usuario = repoUsuarios.buscarUsuario(nombre)
+
         return if (usuario != null && repoUsuarios.eliminarUsuario(usuario)) {
             Usuario.usuariosCreados.remove(usuario)
             true
@@ -36,6 +40,7 @@ class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
 
     override fun cambiarContrasena(nombre: String, nuevaContrasena: String): Boolean {
         val usuario = repoUsuarios.buscarUsuario(nombre)
+
         return if (usuario != null) {
             usuario.cambiarClave(nuevaContrasena)
             repoUsuarios.eliminarUsuario(usuario)

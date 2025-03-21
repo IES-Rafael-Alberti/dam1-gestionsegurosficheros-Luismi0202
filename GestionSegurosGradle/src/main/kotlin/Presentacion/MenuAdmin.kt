@@ -68,12 +68,16 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
             ui.mostrar("Gestión de usuarios no disponible")
             return
         }
+
         ui.mostrar("Nombre:")
         val nombre = ui.recibirEntrada()
+
         ui.mostrar("Contraseña:")
         val contrasena = ui.recibirEntrada()
-        ui.mostrar("Perfil (ADMIN, CLIENTE, AGENTE):")
+
+        ui.mostrar("Perfil (ADMIN, GESTION, CONSULTA):")
         val perfil = ui.recibirEntrada()
+
         if (servUsuarios.crearUsuario(nombre, contrasena, perfil)) {
             ui.mostrar("¡Usuario creado correctamente!")
         } else {
@@ -86,8 +90,10 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
             ui.mostrar("Gestión de usuarios no disponible")
             return
         }
+
         ui.mostrar("Nombre del usuario a eliminar:")
         val nombre = ui.recibirEntrada()
+
         if (servUsuarios.eliminarUsuario(nombre)) {
             ui.mostrar("Usuario eliminado exitosamente")
         } else {
@@ -102,8 +108,10 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
         }
         ui.mostrar("Nombre del usuario:")
         val nombre = ui.recibirEntrada()
+
         ui.mostrar("Nueva contraseña:")
         val nuevaContrasena = ui.recibirEntrada()
+
         if (servUsuarios.cambiarContrasena(nombre, nuevaContrasena)) {
             ui.mostrar("Contraseña cambiada exitosamente")
         } else {
@@ -149,14 +157,19 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
     private fun contratarSeguroHogar() {
         ui.mostrar("Dame el dni del titular")
         val dni = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el importe")
         val importe = ui.recibirEntrada().toDouble()
+
         ui.mostrar("Introduzca los metros cuadrados")
         val metrosCuadrados = ui.recibirEntrada().toInt()
+
         ui.mostrar("Introduzca el valor del contenido")
         val valorContenido = ui.recibirEntrada().toDouble()
+
         ui.mostrar("Introduzca la dirección")
         val direccion = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el año de construcción")
         val anioConstruccion = ui.recibirEntrada().toInt()
 
@@ -171,18 +184,25 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
     private fun contratarSeguroAuto() {
         ui.mostrar("Dame el dni del titular")
         val dni = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el importe")
         val importe = ui.recibirEntrada().toDouble()
+
         ui.mostrar("Introduzca la descripción")
         val descripcion = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el tipo de combustible")
         val combustible = ui.recibirEntrada()
-        ui.mostrar("Introduzca el tipo de automóvil (SEDAN, SUV, HATCHBACK, CONVERTIBLE, TRUCK)")
+
+        ui.mostrar("Introduzca el tipo de automóvil (COCHE,MOTO,CAMIÓN)")
         val tipoAuto = TipoAutomovil.valueOf(ui.recibirEntrada().uppercase())
-        ui.mostrar("Introduzca el tipo de cobertura")
+
+        ui.mostrar("Introduzca el tipo de cobertura (TERCEROS,TERCEROS AMPLIADO,FRANQUICIA 200, FRANQUICIA 300, FRANQUICIA 400, FRANQUICIA 500, TODO RIESGO)")
         val tipoCobertura = ui.recibirEntrada()
+
         ui.mostrar("¿Necesita asistencia en carretera? (true/false)")
         val asistenciaCarretera = ui.recibirEntrada().toBoolean()
+
         ui.mostrar("Introduzca el número de partes")
         val numPartes = ui.recibirEntrada().toInt()
 
@@ -197,16 +217,21 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
     private fun contratarSeguroVida() {
         ui.mostrar("Dame el dni del titular")
         val dni = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el importe")
         val importe = ui.recibirEntrada().toDouble()
+
         ui.mostrar("Introduzca la fecha de nacimiento (YYYY-MM-DD)")
         val fechaNac = ui.recibirEntrada()
+
         ui.mostrar("Introduzca el nivel de riesgo (BAJO, MEDIO, ALTO)")
         val nivelRiesgo = TipoRiesgo.valueOf(ui.recibirEntrada().uppercase())
+
         ui.mostrar("Introduzca la indemnización")
         val indemnizacion = ui.recibirEntrada().toDouble()
 
         val seguro = SeguroVida(0, dni, importe, fechaNac, nivelRiesgo, indemnizacion)
+
         if (servSeguros.contratarSeguro(seguro)) {
             ui.mostrar("Seguro de vida contratado exitosamente")
         } else {
@@ -217,6 +242,7 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
     private fun eliminarSeguro() {
         ui.mostrar("Número de póliza del seguro a eliminar:")
         val numPoliza = ui.recibirEntrada().toIntOrNull()
+
         if (numPoliza != null && servSeguros.eliminarSeguro(numPoliza)) {
             ui.mostrar("Seguro eliminado exitosamente")
         } else {

@@ -6,6 +6,18 @@ import java.io.File
 
 class RepoUsuariosFich : IRepoUsuarios {
     private val filePath = "GestionSegurosGradle/src/main/kotlin/FicherosTexto/Usuarios.txt"
+    val usuarios = mutableListOf<Usuario>()
+
+    init{
+        val users = Utils.leerArchivo(filePath)
+
+        for(user in users){
+            val serializado = Utils.deserializarUsuario(user)
+            if(serializado != null){
+                usuarios.add(serializado)
+            }
+        }
+    }
 
     override fun agregarUsuario(usuario: Usuario): Boolean {
         return try {
@@ -22,7 +34,9 @@ class RepoUsuariosFich : IRepoUsuarios {
 
     override fun eliminarUsuario(usuario: Usuario): Boolean {
         val usuarios = obtenerTodosUsuarios().toMutableList()
+
         val result = usuarios.removeIf { it.nombre == usuario.nombre }
+
         if (result) {
             guardarUsuarios(usuarios)
         }
@@ -32,6 +46,7 @@ class RepoUsuariosFich : IRepoUsuarios {
     override fun eliminarUsuario(nombre: String): Boolean {
         val usuarios = obtenerTodosUsuarios().toMutableList()
         val result = usuarios.removeIf { it.nombre == nombre }
+
         if (result) {
             guardarUsuarios(usuarios)
         }
@@ -40,9 +55,17 @@ class RepoUsuariosFich : IRepoUsuarios {
 
     override fun obtenerTodosUsuarios(): List<Usuario> {
         return try {
-            File(filePath).readLines().map { Utils.deserializarUsuario(it) }
+            File(filePath).readLines()
+                .mapNotNull { linea ->
+                    try {
+                        Utils.deserializarUsuario(linea)
+                    } catch (e: Exception) {
+                        println("¡Error al deserializar usuario! Detalle: $e")
+                        null
+                    }
+                }
         } catch (e: Exception) {
-            println("¡Error! Detalle: $e")
+            println("¡Error al leer el archivo! Detalle: $e")
             emptyList()
         }
     }

@@ -3,6 +3,8 @@ import Domain.SeguroAuto
 import Domain.SeguroHogar
 import Domain.SeguroVida
 import Domain.Usuario
+import Interfaces.IExportable
+import java.io.File
 
 object Utils {
     fun Double.redondearDosDecimales(): Double {
@@ -21,8 +23,51 @@ object Utils {
     }
 
 
-    fun deserializarUsuario(serializado: String): Usuario {
-            val partes = serializado.split(";")
-            return Usuario.crearUsuario(partes)
+    fun deserializarUsuario(serializado: String): Usuario? {
+        val partes = serializado.split(";")
+        return if (partes.size >= 3) {
+
+            Usuario.crearUsuario(partes,false)
+        } else {
+            println("¡Error! Datos insuficientes para deserializar el usuario")
+            null
+        }
     }
+
+    fun leerArchivo(ruta: String): List<String> {
+        return try {
+            File(ruta).readLines()
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun leerSeguros(ruta: String, mapaSeguros: Map<String, (List<String>) -> Seguro>): List<Seguro> {
+        val lineas = leerArchivo(ruta)
+        return lineas.mapNotNull { linea ->
+            val datos = linea.split(";")
+            val tipo = datos.last()
+            val creadorSeguro = mapaSeguros[tipo]
+            creadorSeguro?.invoke(datos)
+        }
+    }
+
+    fun agregarLinea(ruta: String, linea: String): Boolean {
+        return try {
+            File(ruta).appendText("$linea\n")
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun <T: IExportable> escribirArchivo(ruta: String, elementos: List<T>): Boolean {
+        return try {
+            File(ruta).writeText(elementos.joinToString("\n") { it.serializar() })
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
 }
