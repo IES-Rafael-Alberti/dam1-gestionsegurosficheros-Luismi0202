@@ -1,7 +1,5 @@
 package Presentacion
 
-import Presentacion.IUserInterface
-import Presentacion.MenuAdmin
 import Service.IServSeguros
 
 class MenuGestion(private val ui: IUserInterface, private val servSeguros: IServSeguros) {

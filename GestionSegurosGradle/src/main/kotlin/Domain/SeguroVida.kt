@@ -10,15 +10,17 @@ open class SeguroVida : Seguro {
     private val nivelRiesgo: TipoRiesgo
     private val indemnizacion: Double
 
+    init{
+        aumentarId()
+    }
+
     constructor(
         dniTitular: String,
         importe: Double,
         fechaNac: String,
         nivelRiesgo: TipoRiesgo,
         indemnizacion: Double
-    ) : this(id, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion) {
-        aumentarId()
-    }
+    ) : this(id, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion)
 
 
     internal constructor(

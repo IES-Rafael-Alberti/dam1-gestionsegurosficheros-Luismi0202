@@ -8,6 +8,9 @@ open class SeguroHogar : Seguro {
     val direccion: String
     val anioConstruccion: Int
 
+    init{
+        aumentarId()
+    }
 
     constructor(
         dniTitular: String,
@@ -16,9 +19,7 @@ open class SeguroHogar : Seguro {
         valorContenido: Double,
         direccion: String,
         anioConstruccion: Int
-    ) : this(id, dniTitular, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion) {
-        aumentarId()
-    }
+    ) : this(id, dniTitular, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
 
     internal constructor(
         numPoliza: Int,

@@ -10,6 +10,9 @@ open class SeguroAuto : Seguro {
     private val asistenciaCarretera: Boolean
     private val numPartes: Int
 
+    init{
+        aumentarId()
+    }
     constructor(
         dniTitular: String,
         importe: Double,
@@ -19,9 +22,7 @@ open class SeguroAuto : Seguro {
         tipoCobertura: String,
         asistenciaCarretera: Boolean,
         numPartes: Int
-    ) : this(id, dniTitular, importe, descripcion, combustible, tipoAuto, tipoCobertura, asistenciaCarretera, numPartes) {
-        aumentarId()
-    }
+    ) : this(id, dniTitular, importe, descripcion, combustible, tipoAuto, tipoCobertura, asistenciaCarretera, numPartes)
 
 
     internal constructor(
