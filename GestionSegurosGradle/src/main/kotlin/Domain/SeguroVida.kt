@@ -1,37 +1,81 @@
 package Domain
 
 import EnumClasificatorias.TipoRiesgo
+import EnumClasificatorias.TipoRiesgo.Companion.interes
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class SeguroVida(
-    numPoliza: Int,
-    dniTitular: String,
-    importe: Double,
-    val fechaNac:String,
-    val nivelRiesgo:TipoRiesgo,
-    val indemnizacion:Double
-):Seguro(numPoliza,dniTitular,importe) {
+class SeguroVida : Seguro {
+    private val fechaNac: LocalDate
+    private val nivelRiesgo: TipoRiesgo
+    private val indemnizacion: Double
 
-    init {
+    // Secondary constructor for creating a new insurance policy
+    constructor(
+        dniTitular: String,
+        importe: Double,
+        fechaNac: String,
+        nivelRiesgo: TipoRiesgo,
+        indemnizacion: Double
+    ) : this(id, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion) {
         aumentarId()
     }
 
+    // Secondary constructor for creating an existing insurance policy
+    private constructor(
+        numPoliza: Int,
+        dniTitular: String,
+        importe: Double,
+        fechaNac: String,
+        nivelRiesgo: TipoRiesgo,
+        indemnizacion: Double
+    ) : super(numPoliza, dniTitular, importe) {
+        this.fechaNac = LocalDate.parse(fechaNac, DateTimeFormatter.ISO_LOCAL_DATE)
+        this.nivelRiesgo = nivelRiesgo
+        this.indemnizacion = indemnizacion
+    }
+
     override fun calcularImporteAnioSiguiente(interes: Double): Double {
-        TODO("Not yet implemented")
+        val anioActual = LocalDate.now().year
+        val anioNacimiento = fechaNac.year
+        val edad = anioActual - anioNacimiento
+        val interesResidual = (edad * 0.0005) + nivelRiesgo.interes()
+        val interesTotal = interes + interesResidual
+        return importe * (1 + interesTotal)
     }
 
     override fun tipoSeguro(): String {
-        return "SeguroVida"
+        return this::class.simpleName ?: "Desconocido"
     }
 
     override fun serializar(): String {
-        return "$id;$dniTitular;$numPoliza;$importe;$fechaNac;$nivelRiesgo;$indemnizacion;${tipoSeguro()}"
+        return super.serializar()+";${fechaNac.format(DateTimeFormatter.ISO_LOCAL_DATE)};$nivelRiesgo;$indemnizacion;${tipoSeguro()}"
     }
 
-    companion object{
-        protected var id = 800000
+    override fun toString(): String {
+        return "${super.toString()},fechaNac=${fechaNac.format(DateTimeFormatter.ISO_LOCAL_DATE)}, nivelRiesgo=$nivelRiesgo, indemnizacion=$indemnizacion)"
+    }
 
-        protected fun aumentarId(){
+    companion object {
+        private var id = 800000
+
+        private fun aumentarId() {
             id++
+        }
+
+        fun crearSeguro(datos: List<String>): SeguroVida {
+            try {
+                val numPoliza = datos[0].toInt()
+                val dniTitular = datos[1]
+                val importe = datos[2].toDouble()
+                val fechaNac = datos[3]
+                val nivelRiesgo = TipoRiesgo.valueOf(datos[4])
+                val indemnizacion = datos[5].toDouble()
+
+                return SeguroVida(numPoliza, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion)
+            } catch (e: Exception) {
+                throw IllegalArgumentException("Error en la conversión de datos: ${e.message}")
+            }
         }
     }
 }
