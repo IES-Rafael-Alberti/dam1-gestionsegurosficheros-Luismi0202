@@ -1,3 +1,0 @@
-luismi;$2a$10$yljdvijrMY1P0tNPGwWtG.L4ClVUsdqq3jEff9OKnXFIFkrMliIgu;ADMIN
-paco;$2a$10$NX824S28Kijv3xhaeu9avuXzeXRl/RMobiF5g3anfHXVBADP3H0wO;GESTION
-pablo;$2a$10$OtYb8V2FvLprdiQ8nz1ptuOIL/dXooU/mtJ1zQITJzIoRk6n/znta;CONSULTA

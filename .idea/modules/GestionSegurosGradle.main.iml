@@ -43,8 +43,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:2.0.21" level="project" />
-    <orderEntry type="library" name="Gradle: org.mindrot:jbcrypt:0.4" level="project" />
+    <orderEntry type="library" name="Gradle: at.favre.lib:bcrypt:0.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jline:jline:3.21.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" name="kotlin-compiler-embeddable-2.0.21.jar" level="project" />
+    <orderEntry type="library" name="Gradle: at.favre.lib:bytes:1.3.0" level="project" />
   </component>
 </module>

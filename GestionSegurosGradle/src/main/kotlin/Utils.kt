@@ -1,8 +1,6 @@
-import Domain.Seguro
-import Domain.SeguroAuto
-import Domain.SeguroHogar
-import Domain.SeguroVida
-import Domain.Usuario
+
+import at.favre.lib.crypto.bcrypt.BCrypt
+import model.*
 import java.io.File
 
 object Utils {
@@ -10,14 +8,22 @@ object Utils {
         return "%.${2}f".format(this).replace(",", ".").toDouble()
     }
 
-    fun deserializarSeguro(serializado: String): Seguro {
+    fun encriptarClave(clave: String, nivelSeguridad: Int = 12): String {
+        return BCrypt.withDefaults().hashToString(nivelSeguridad, clave.toCharArray())
+    }
+
+    fun verificarClave(claveIngresada: String, hashAlmacenado: String): Boolean {
+        return BCrypt.verifyer().verify(claveIngresada.toCharArray(), hashAlmacenado).verified
+    }
+
+    fun deserializarSeguro(serializado: String): Seguro? {
         val partes = serializado.split(";")
 
         return when (partes.last()) {
             "SeguroHogar" -> SeguroHogar.crearSeguro(partes)
             "SeguroVida" -> SeguroVida.crearSeguro(partes)
             "SeguroAuto" -> SeguroAuto.crearSeguro(partes)
-            else -> throw IllegalArgumentException("Tipo de seguro desconocido")
+            else -> null
         }
     }
 
@@ -26,7 +32,7 @@ object Utils {
         val partes = serializado.split(";")
         return if (partes.size >= 3) {
 
-            Usuario.crearUsuario(partes,false)
+            Usuario.crearUsuario(partes)
         } else {
             println("¡Error! Datos insuficientes para deserializar el usuario")
             null
