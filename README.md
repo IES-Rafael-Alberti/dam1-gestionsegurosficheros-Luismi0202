@@ -1,3 +1,9 @@
+# ACLARACIONES POR PARTE DEL ALUMNO 
+
+He creado dos ramas ya que hice el ejercicio hace unas semanas pero la estructura del proyecto ha cambiado mucho y hay algunas cosas que no seguí a raja tabla, de todas formas, es funcional y cumple con el objetivo (hacer un gestor de seguros con ficheros txt/prueba en almacenamiento inyectando una de las dos dependiendo del modo que elijas).
+
+A día de hoy (28/03/2025), encontrarás en la rama Main el programa de forma desordenada, con algunas funciones que no utilizo y con una estructura un poco más liosa. En la otra rama, estoy trabajando con la estructura dada y he mejorado un par de cosas más. Me falta el hecho de trabajar con los ficheros de texto, cuando la tenga funcional cambiaré para que en el main este el programa ya más ordenado.
+
 # Práctica Gestión de Seguros con Ficheros
 
 Aquí tenéis el enlace al enunciado: [Enunciado de la práctica PRO2425 - Gestión de Seguros](https://github.com/dcanoIESRafaelAlberti/PRO2425_Seguros/blob/main/README.md)
