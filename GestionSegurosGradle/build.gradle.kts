@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.mindrot:jbcrypt:0.4")
+    implementation("at.favre.lib:bcrypt:0.9.0")
 }
 
 tasks.test {

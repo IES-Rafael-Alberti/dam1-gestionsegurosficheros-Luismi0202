@@ -1,28 +1,38 @@
 package Domain
 
-import org.mindrot.jbcrypt.BCrypt
+import at.favre.lib.crypto.bcrypt.BCrypt
 import EnumClasificatorias.TipoPerfil
 import Interfaces.IExportable
 
 class Usuario(
     val nombre: String,
-    private var contrasenia: String,
+    var contrasenia: String,
     val perfil: TipoPerfil
 ) : IExportable {
 
-    var contraseniaEncriptada: String = BCrypt.hashpw(contrasenia, BCrypt.gensalt())
 
-    fun verificarClave(clave: String): Boolean {
-        return BCrypt.checkpw(clave, contraseniaEncriptada)
+
+
+    /**
+     * Verifica si una contraseña ingresada coincide con un hash almacenado previamente usando BCrypt.
+     *
+     * Esta función permite autenticar a un usuario comprobando si la clave ingresada,
+     * tras ser procesada con BCrypt, coincide con el hash almacenado en la base de datos.
+     *
+     * @param claveIngresada La contraseña en texto plano que se desea comprobar.
+     * @param hashAlmacenado El hash BCrypt previamente generado contra el que se verificará la clave ingresada.
+     * @return `true` si la clave ingresada coincide con el hash almacenado, `false` en caso contrario.
+     */
+    fun verificarClave(claveIngresada: String, hashAlmacenado: String): Boolean {
+        return BCrypt.verifyer().verify(claveIngresada.toCharArray(), hashAlmacenado).verified
     }
 
     fun cambiarClave(nuevaClave: String) {
         contrasenia = nuevaClave
-        contraseniaEncriptada = BCrypt.hashpw(contrasenia, BCrypt.gensalt())
     }
 
     override fun serializar(): String {
-        return "$nombre;$contraseniaEncriptada;$perfil"
+        return "$nombre;$contrasenia;$perfil"
     }
 
     companion object {

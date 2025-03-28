@@ -9,7 +9,7 @@ class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
     override fun autenticarUsuario(nombre: String, contrasena: String): Usuario? {
         val usuario = repoUsuarios.buscarUsuario(nombre)
 
-        return if (usuario != null && usuario.verificarClave(contrasena)) usuario else null
+        return if (usuario != null && usuario.verificarClave(contrasena,usuario.contrasenia)) usuario else null
     }
 
     override fun crearUsuario(nombre: String, contrasena: String, perfil: String): Boolean {

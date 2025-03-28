@@ -1,4 +1,3 @@
-package Main
 
 import Data.IRepoSeguros
 import Data.IRepoUsuarios
@@ -39,7 +38,7 @@ fun main() {
         ui.mostrar("Nombre:")
         val nombre = ui.recibirEntrada()
         ui.mostrar("Contraseña:")
-        val contrasena = ui.recibirEntrada()
+        val contrasena = Utils.encriptarClave(ui.recibirEntrada())
 
         if (servUsuarios.crearUsuario(nombre, contrasena, "ADMIN")) {
             ui.mostrar("Usuario ADMIN creado exitosamente")

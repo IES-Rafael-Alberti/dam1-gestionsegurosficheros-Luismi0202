@@ -73,7 +73,7 @@ class MenuAdmin(private val ui: IUserInterface, private val servUsuarios: IServU
         val nombre = ui.recibirEntrada()
 
         ui.mostrar("Contraseña:")
-        val contrasena = ui.recibirEntrada()
+        val contrasena = Utils.encriptarClave(ui.recibirEntrada())
 
         ui.mostrar("Perfil (ADMIN, GESTION, CONSULTA):")
         val perfil = ui.recibirEntrada()
