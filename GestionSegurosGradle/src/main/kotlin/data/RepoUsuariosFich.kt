@@ -12,6 +12,7 @@ class RepoUsuariosFich : RepoUsuariosMem(), ICargarUsuariosIniciales {
 
     override fun agregarUsuario(usuario: Usuario): Boolean {
         return try {
+            usuarios.add(usuario)
             File(filePath).appendText(usuario.serializar() + "\n")
             true
         } catch (e: Exception) {
@@ -21,15 +22,14 @@ class RepoUsuariosFich : RepoUsuariosMem(), ICargarUsuariosIniciales {
 
     override fun eliminarUsuario(usuario: Usuario): Boolean {
         val result = usuarios.removeIf { it.nombre == usuario.nombre }
-
         if (result) {
             guardarUsuarios(usuarios)
         }
+
         return result
     }
 
     override fun eliminarUsuario(nombre: String): Boolean {
-        val usuarios = obtenerTodosUsuarios().toMutableList()
         val result = usuarios.removeIf { it.nombre == nombre }
 
         if (result) {

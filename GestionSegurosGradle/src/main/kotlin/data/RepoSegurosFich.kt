@@ -22,8 +22,8 @@ class RepoSegurosFich : RepoSegurosMem(),IRepoSeguros,ICargarSegurosIniciales  {
     }
 
     override fun eliminar(seguro: Seguro): Boolean {
-        val seguros = obtenerTodos().toMutableList()
-        val result = seguros.removeIf { it.getNumPoliza() == seguro.getNumPoliza() }
+        var result = seguros.removeIf { it.getNumPoliza() == seguro.getNumPoliza() }
+
         if (result) {
             guardarSeguros(seguros)
         }
@@ -31,7 +31,6 @@ class RepoSegurosFich : RepoSegurosMem(),IRepoSeguros,ICargarSegurosIniciales  {
     }
 
     override fun eliminar(numPoliza: Int): Boolean {
-        val seguros = obtenerTodos().toMutableList()
         val result = seguros.removeIf { it.getNumPoliza() == numPoliza }
         if (result) {
             guardarSeguros(seguros)
