@@ -9,7 +9,7 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
 
     constructor(servSeguros: IServSeguros) : this(null, servSeguros)
 
-    open val ui = Consola()
+    val ui = Consola()
 
     fun mostrarMenu() {
         var seguir = true
@@ -156,91 +156,102 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
     }
 
     private fun contratarSeguroHogar() {
-        val dni = ui.pedirInfo("Dame el dni del titular")
+        try {
+            val dni = ui.pedirInfo("Dame el dni del titular")
 
-        val importe = ui.pedirInfo("Introduzca el importe").toDouble()
+            val importe = ui.pedirInfo("Introduzca el importe").toDouble()
 
-        val metrosCuadrados = ui.pedirInfo("Introduzca los metros cuadrados").toInt()
+            val metrosCuadrados = ui.pedirInfo("Introduzca los metros cuadrados").toInt()
 
-        val valorContenido = ui.pedirInfo("Introduzca el valor del contenido").toDouble()
+            val valorContenido = ui.pedirInfo("Introduzca el valor del contenido").toDouble()
 
-        val direccion = ui.pedirInfo("Introduzca la dirección")
+            val direccion = ui.pedirInfo("Introduzca la dirección")
 
-        val anioConstruccion = ui.pedirInfo("Introduzca el año de construcción").toInt()
+            val anioConstruccion = ui.pedirInfo("Introduzca el año de construcción").toInt()
 
-        val seguro = SeguroHogar(dni, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
-        if (servSeguros.contratarSeguro(seguro)) {
-            ui.mostrar("Seguro de hogar contratado exitosamente")
-        } else {
-            ui.mostrar("Error al contratar el seguro de hogar")
+            val seguro = SeguroHogar(dni, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
+            if (servSeguros.contratarSeguro(seguro)) {
+                ui.mostrar("Seguro de hogar contratado exitosamente")
+            } else {
+                ui.mostrar("Error al contratar el seguro de hogar")
+            }
+        }catch(e: Exception){
+            println("¡Error al contratar seguro! Detalle: ${e.message}")
         }
     }
 
     private fun contratarSeguroAuto() {
-        val dni = ui.pedirInfo("Dame el dni del titular")
+        try {
+            val dni = ui.pedirInfo("Dame el dni del titular")
 
-        val importe = ui.pedirInfo("Introduzca el importe").toDouble()
+            val importe = ui.pedirInfo("Introduzca el importe").toDouble()
 
-        val descripcion = ui.pedirInfo("Introduzca la descripción")
+            val descripcion = ui.pedirInfo("Introduzca la descripción")
 
-        val combustible = ui.pedirInfo("Introduzca el tipo de combustible")
+            val combustible = ui.pedirInfo("Introduzca el tipo de combustible")
 
-        ui.mostrar("Introduzca el tipo de automóvil (COCHE,MOTO,CAMIÓN)")
-        val tipoAuto = TipoAutomovil.getAuto(ui.pedirInfo().uppercase())
+            ui.mostrar("Introduzca el tipo de automóvil (COCHE,MOTO,CAMIÓN)")
+            val tipoAuto = TipoAutomovil.getAuto(ui.pedirInfo().uppercase())
 
-        ui.mostrar("Introduzca el tipo de cobertura (TERCEROS,TERCEROS AMPLIADO,FRANQUICIA 200, FRANQUICIA 300, FRANQUICIA 400, FRANQUICIA 500, TODO RIESGO)")
-        val tipoCobertura = Cobertura.getCobertura(ui.pedirInfo().uppercase())
+            ui.mostrar("Introduzca el tipo de cobertura (TERCEROS,TERCEROS AMPLIADO,FRANQUICIA 200, FRANQUICIA 300, FRANQUICIA 400, FRANQUICIA 500, TODO RIESGO)")
+            val tipoCobertura = Cobertura.getCobertura(ui.pedirInfo().uppercase())
 
-        val asistenciaCarretera = ui.pedirInfo("¿Necesita asistencia en carretera? (true/false)").toBoolean()
+            val asistenciaCarretera = ui.pedirInfo("¿Necesita asistencia en carretera? (true/false)").toBoolean()
 
-        val numPartes = ui.pedirInfo("Introduzca el número de partes").toInt()
+            val numPartes = ui.pedirInfo("Introduzca el número de partes").toInt()
 
-        if(tipoAuto == null){
-            ui.mostrar("Error al contratar el seguro de auto")
-        }
-        else {
-            val seguro = SeguroAuto(
-                dni,
-                importe,
-                descripcion,
-                combustible,
-                tipoAuto!!,
-                tipoCobertura.toString(),
-                asistenciaCarretera,
-                numPartes
-            )
-
-            if (servSeguros.contratarSeguro(seguro)) {
-                ui.mostrar("Seguro de auto contratado exitosamente")
-            } else {
+            if (tipoAuto == null) {
                 ui.mostrar("Error al contratar el seguro de auto")
+            } else {
+                val seguro = SeguroAuto(
+                    dni,
+                    importe,
+                    descripcion,
+                    combustible,
+                    tipoAuto,
+                    tipoCobertura.toString(),
+                    asistenciaCarretera,
+                    numPartes
+                )
+
+                if (servSeguros.contratarSeguro(seguro)) {
+                    ui.mostrar("Seguro de auto contratado exitosamente")
+                } else {
+                    ui.mostrar("Error al contratar el seguro de auto")
+                }
             }
+        }catch (e:Exception){
+            println("¡Error al contratar seguro! Detalle: ${e.message}")
         }
     }
 
     private fun contratarSeguroVida() {
-        val dni = ui.pedirInfo("Dame el dni del titular")
+        try {
+            val dni = ui.pedirInfo("Dame el dni del titular")
 
-        val importe = ui.pedirInfo("Introduzca el importe").toDouble()
+            val importe = ui.pedirInfo("Introduzca el importe").toDouble()
 
-        val fechaNac = ui.pedirInfo("Introduzca la fecha de nacimiento (YYYY-MM-DD)")
+            val fechaNac = ui.pedirInfo("Introduzca la fecha de nacimiento (YYYY-MM-DD)")
 
-        val nivelRiesgo = TipoRiesgo.getRiesgo(ui.pedirInfo("Introduzca el nivel de riesgo (BAJO, MEDIO, ALTO)").uppercase())
+            val nivelRiesgo =
+                TipoRiesgo.getRiesgo(ui.pedirInfo("Introduzca el nivel de riesgo (BAJO, MEDIO, ALTO)").uppercase())
 
-        ui.mostrar("Introduzca la indemnización")
-        val indemnizacion = ui.pedirInfo().toDouble()
+            ui.mostrar("Introduzca la indemnización")
+            val indemnizacion = ui.pedirInfo().toDouble()
 
-        if(nivelRiesgo == null){
-            ui.mostrar("Error al contratar el seguro de vida")
-        }
-        else {
-            val seguro = SeguroVida(dni, importe, fechaNac, nivelRiesgo, indemnizacion)
-
-            if (servSeguros.contratarSeguro(seguro)) {
-                ui.mostrar("Seguro de vida contratado exitosamente")
-            } else {
+            if (nivelRiesgo == null) {
                 ui.mostrar("Error al contratar el seguro de vida")
+            } else {
+                val seguro = SeguroVida(dni, importe, fechaNac, nivelRiesgo, indemnizacion)
+
+                if (servSeguros.contratarSeguro(seguro)) {
+                    ui.mostrar("Seguro de vida contratado exitosamente")
+                } else {
+                    ui.mostrar("Error al contratar el seguro de vida")
+                }
             }
+        }catch(e: Exception){
+            println("¡Error al crear seguro de vida! Detalle: ${e.message}")
         }
     }
 
