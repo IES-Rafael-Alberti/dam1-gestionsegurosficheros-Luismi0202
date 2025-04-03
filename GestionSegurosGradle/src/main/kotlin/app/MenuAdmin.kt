@@ -29,7 +29,6 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
                 "3" -> seguir = false
                 else -> ui.mostrar("Opción inválida")
             }
-            ui.pausar("PULSA ENTER PARA CONTINUAR" )
         }
     }
 
