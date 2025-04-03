@@ -1,8 +1,6 @@
 # ACLARACIONES POR PARTE DEL ALUMNO 
 
-He creado dos ramas ya que hice el ejercicio hace unas semanas pero la estructura del proyecto ha cambiado mucho y hay algunas cosas que no seguí a raja tabla, de todas formas, es funcional y cumple con el objetivo (hacer un gestor de seguros con ficheros txt/prueba en almacenamiento inyectando una de las dos dependiendo del modo que elijas).
-
-A día de hoy (28/03/2025), encontrarás en la rama Main el programa de forma desordenada, con algunas funciones que no utilizo y con una estructura un poco más liosa. En la otra rama, estoy trabajando con la estructura dada y he mejorado un par de cosas más. Me falta el hecho de trabajar con los ficheros de texto, cuando la tenga funcional cambiaré para que en el main este el programa ya más ordenado.
+Había creado otra rama hace bastante porque tenía el código bastante desestructurado pero logré que me funcionará y me pegué mucho tiempo, así que decidí crear otra rama donde organizará un poco mejor el código y usará mejor el repo de usuario para poder intentar usar mejor lo de las capas. La segunda rama (INTENTO DE MEJORA) ya es totalmente funcional, es donde tengo el programa bastante mejor hecho, menú cambiado para que sea mas intuitivo y los datos los coge de me falta hacer el pull request, pero sigo intentando perfeccionar alguna cosilla.
 
 # Práctica Gestión de Seguros con Ficheros
 
