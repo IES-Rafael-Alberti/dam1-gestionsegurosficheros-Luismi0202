@@ -20,8 +20,6 @@ class RepoUsuariosFich : RepoUsuariosMem(), ICargarUsuariosIniciales {
     }
 
     override fun eliminarUsuario(usuario: Usuario): Boolean {
-        val usuarios = obtenerTodosUsuarios().toMutableList()
-
         val result = usuarios.removeIf { it.nombre == usuario.nombre }
 
         if (result) {
