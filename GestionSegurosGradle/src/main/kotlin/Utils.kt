@@ -47,14 +47,4 @@ object Utils {
         }
     }
 
-    fun leerSeguros(ruta: String, mapaSeguros: Map<String, (List<String>) -> Seguro>): List<Seguro> {
-        val lineas = leerArchivo(ruta)
-        return lineas.mapNotNull { linea ->
-            val datos = linea.split(";")
-            val tipo = datos.last()
-            val creadorSeguro = mapaSeguros[tipo]
-            creadorSeguro?.invoke(datos)
-        }
-    }
-
 }

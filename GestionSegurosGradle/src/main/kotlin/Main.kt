@@ -10,7 +10,6 @@ import data.RepoUsuariosMem
 import model.TipoPerfil
 import ui.Consola
 import app.*
-import service.*
 import service.GestorUsuarios
 
 fun main() {

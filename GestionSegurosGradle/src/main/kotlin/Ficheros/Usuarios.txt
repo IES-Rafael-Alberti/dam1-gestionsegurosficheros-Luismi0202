@@ -1,1 +1,3 @@
 luismi;$2a$12$KjdEvJXtwkfL30SSs7cYxuuzofaHG9LjSr4QMwn8V3uxf9Do.jbpy;ADMIN
+juana;$2a$12$mjjga7pman9PnpvdmTVos.IAeq4Zq2U0TF5PU6XhpBTXEq8v8WsxW;GESTION
+pablo;$2a$12$qch9q91OZAw5q5i14ddinuUdPA9YYMixmSROIzwfCAq52PZwt.02u;CONSULTA

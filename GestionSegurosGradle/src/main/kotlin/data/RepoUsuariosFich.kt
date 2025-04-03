@@ -1,6 +1,5 @@
 package data
 
-import data.ICargarUsuariosIniciales
 import model.Usuario
 import java.io.File
 

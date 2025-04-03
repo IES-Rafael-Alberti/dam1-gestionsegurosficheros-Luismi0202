@@ -1,7 +1,6 @@
 package data
 
-import data.ICargarSegurosIniciales
-import data.RepoSegurosMem
+
 import model.*
 import java.io.File
 
@@ -14,6 +13,7 @@ class RepoSegurosFich : RepoSegurosMem(),IRepoSeguros,ICargarSegurosIniciales  {
 
     override fun agregar(seguro: Seguro): Boolean {
         return try {
+            seguros.add(seguro)
             File(filePath).appendText(seguro.serializar() + "\n")
             true
         } catch (e: Exception) {

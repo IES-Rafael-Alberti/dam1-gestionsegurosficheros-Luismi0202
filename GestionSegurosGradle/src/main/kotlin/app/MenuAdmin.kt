@@ -195,7 +195,7 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
 
         val numPartes = ui.pedirInfo("Introduzca el número de partes").toInt()
 
-        if(tipoAuto == null && tipoCobertura == null){
+        if(tipoAuto == null){
             ui.mostrar("Error al contratar el seguro de auto")
         }
         else {
