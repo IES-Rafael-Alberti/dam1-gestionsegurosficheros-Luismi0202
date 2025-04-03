@@ -46,6 +46,7 @@ open class RepoUsuariosMem : IRepoUsuarios {
 
     override fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean {
         var cambiada = false
+
         try {
             usuario.cambiarClave(nuevaClave)
             cambiada = true

@@ -8,7 +8,7 @@ interface IServUsuarios {
     fun eliminarUsuario(nombre: String): Boolean
     fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean
     fun buscarUsuario(nombre: String): Usuario?
-    fun consultarTodos(): List<Usuario>
-    fun consultarPorPerfil(perfil: TipoPerfil): List<Usuario>
+    fun consultarTodos()
+    fun consultarPorPerfil(perfil: TipoPerfil)
 
 }

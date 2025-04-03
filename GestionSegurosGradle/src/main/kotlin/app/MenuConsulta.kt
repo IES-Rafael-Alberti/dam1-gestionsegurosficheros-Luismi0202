@@ -12,13 +12,9 @@ class MenuConsulta(private val servSeguros: IServSeguros) {
             menuAdmin.ui.mostrar("""
                 📌 Menú de consulta
                 
-                Seguros
-                    1. Consultar
-                        1. Todos
-                        2. Hogar
-                        3. Auto
-                        4. Vida
-                2. Salir
+                1.- Consultar seguros
+                
+                2.- Salir
             """.trimIndent())
             when (menuAdmin.ui.pedirInfo()) {
                 "1" -> menuAdmin.consultarSeguro()

@@ -42,11 +42,15 @@ class GestorUsuarios(
         return repoUsuarios.buscarUsuario(nombre)
     }
 
-    override fun consultarTodos(): List<Usuario> {
-        return repoUsuarios.obtenerTodosUsuarios()
+    override fun consultarTodos(){
+        for(usuario in repoUsuarios.obtenerTodosUsuarios()){
+            println(usuario)
+        }
     }
 
-    override fun consultarPorPerfil(perfil: TipoPerfil): List<Usuario> {
-        return repoUsuarios.obtenerUsuarioPerfil(perfil)
+    override fun consultarPorPerfil(perfil: TipoPerfil){
+        for(usuario in repoUsuarios.obtenerUsuarioPerfil(perfil)){
+            println(usuario)
+        }
     }
 }

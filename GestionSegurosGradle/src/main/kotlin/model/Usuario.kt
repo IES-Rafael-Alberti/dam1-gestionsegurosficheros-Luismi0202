@@ -15,6 +15,10 @@ class Usuario private constructor(
         return "$nombre;$contrasenia;$perfil"
     }
 
+    override fun toString(): String {
+        return "nombre: $nombre perfil: $perfil"
+    }
+
     companion object {
 
         fun crearUsuario(datos: List<String>): Usuario? {

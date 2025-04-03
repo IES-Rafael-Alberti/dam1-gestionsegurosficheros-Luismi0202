@@ -14,24 +14,13 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
     fun mostrarMenu() {
         var seguir = true
         while (seguir) {
+            ui.limpiarPantalla(50)
             ui.mostrar("""
                 📌 Menú de admin
                 
                 1. Usuarios
-                    1. Nuevo
-                    2. Eliminar
-                    3. Cambiar contraseña
                 2. Seguros
-                    1. Contratar
-                        1. Hogar
-                        2. Auto
-                        3. Vida
-                    2. Eliminar
-                    3. Consultar
-                        1. Todos
-                        2. Hogar
-                        3. Auto
-                        4. Vida
+                
                 3. Salir
             """.trimIndent())
             when (ui.pedirInfo()) {
@@ -40,26 +29,62 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
                 "3" -> seguir = false
                 else -> ui.mostrar("Opción inválida")
             }
+            ui.pausar("PULSA ENTER PARA CONTINUAR" )
         }
     }
 
     private fun menuUsuarios() {
+        var seguir = true
+
         if (servUsuarios == null) {
             ui.mostrar("Gestión de usuarios no disponible")
             return
-        }
-        ui.mostrar("""
+        } //En caso de borrar el nuestro, ya no se podrá gestionar y se saldrá.
+
+        while(seguir) {
+            ui.limpiarPantalla(50)
+            ui.mostrar(
+                """
             1. Nuevo
             2. Eliminar
             3. Cambiar contraseña
-        """.trimIndent())
-        when (ui.pedirInfo()) {
-            "1" -> nuevoUsuario()
-            "2" -> eliminarUsuario()
-            "3" -> cambiarContrasena()
-            else -> ui.mostrar("Opción inválida")
+            4.- Consultar todos
+            5.- Consultar por perfil
+            
+            6.- Volver
+        """.trimIndent()
+            )
+            when (ui.pedirInfo()) {
+                "1" -> {
+                    nuevoUsuario()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+                "2" ->{
+                    eliminarUsuario()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "3" -> {
+                    cambiarContrasena()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "4" -> {
+                    servUsuarios.consultarTodos()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+                "5" -> {
+                    servUsuarios.consultarPorPerfil(TipoPerfil.getPerfil(ui.pedirInfo("Dame el perfil que quieres consultar (ADMIN, GESTION,CONSULTA)")))
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "6" -> seguir = false
+
+                else -> ui.mostrar("Opción inválida")
+            }
         }
     }
+
 
     private fun nuevoUsuario() {
         if (servUsuarios == null) {
@@ -121,27 +146,42 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
     }
 
     fun menuSeguros() {
-        ui.mostrar("""
+        var seguir = true
+        while(seguir) {
+            ui.limpiarPantalla(50)
+            ui.mostrar(
+                """
             1. Contratar
-                1. Hogar
-                2. Auto
-                3. Vida
             2. Eliminar
             3. Consultar
-                1. Todos
-                2. Hogar
-                3. Auto
-                4. Vida
-        """.trimIndent())
-        when (ui.pedirInfo()) {
-            "1" -> contratarSeguro()
-            "2" -> eliminarSeguro()
-            "3" -> consultarSeguro()
-            else -> ui.mostrar("Opción inválida")
+            
+            4.- Salir
+        """.trimIndent()
+            )
+            when (ui.pedirInfo()) {
+                "1" -> {
+                    contratarSeguro()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "2" -> {
+                    eliminarSeguro()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "3" ->{
+                    consultarSeguro()
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "4"-> seguir = false
+                else -> ui.mostrar("Opción inválida")
+            }
         }
     }
 
     private fun contratarSeguro() {
+        ui.limpiarPantalla(50)
         ui.mostrar("""
             1. Hogar
             2. Auto
@@ -149,8 +189,11 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
         """.trimIndent())
         when (ui.pedirInfo()) {
             "1" -> contratarSeguroHogar()
+
             "2" -> contratarSeguroAuto()
+
             "3" -> contratarSeguroVida()
+
             else -> ui.mostrar("Opción inválida")
         }
     }
@@ -272,18 +315,44 @@ class MenuAdmin(private val servUsuarios: IServUsuarios?, private val servSeguro
     }
 
     fun consultarSeguro() {
-        ui.mostrar("""
+        var seguir = true
+        while(seguir) {
+            ui.limpiarPantalla(50)
+            ui.mostrar(
+                """
             1. Todos
             2. Hogar
             3. Auto
             4. Vida
-        """.trimIndent())
-        when (ui.pedirInfo()) {
-            "1" -> mostrarSeguro(servSeguros.listarSeguros())
-            "2" -> mostrarSeguro(servSeguros.consultarSeguros(SeguroHogar::class.simpleName ?: "SeguroHogar"))
-            "3" -> mostrarSeguro(servSeguros.consultarSeguros(SeguroAuto::class.simpleName ?: "SeguroAuto"))
-            "4" -> mostrarSeguro(servSeguros.consultarSeguros(SeguroVida::class.simpleName ?: "SeguroVida"))
-            else -> ui.mostrar("Opción inválida")
+            
+            5.- Volver
+        """.trimIndent()
+            )
+            when (ui.pedirInfo()) {
+                "1" -> {
+                    mostrarSeguro(servSeguros.listarSeguros())
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "2" -> {
+                    mostrarSeguro(servSeguros.consultarSeguros(SeguroHogar::class.simpleName ?: "SeguroHogar"))
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "3" -> {
+                    mostrarSeguro(servSeguros.consultarSeguros(SeguroAuto::class.simpleName ?: "SeguroAuto"))
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "4" -> {
+                    mostrarSeguro(servSeguros.consultarSeguros(SeguroVida::class.simpleName ?: "SeguroVida"))
+                    ui.pausar("PULSA ENTER PARA CONTINUAR")
+                }
+
+                "5" -> seguir = false
+
+                else -> ui.mostrar("Opción inválida")
+            }
         }
     }
 }

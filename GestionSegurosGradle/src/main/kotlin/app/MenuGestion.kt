@@ -12,17 +12,8 @@ class MenuGestion(private val servSeguros: IServSeguros) {
                 """
                 📌 Menú de gestión
                 
-                1. Seguros
-                    1. Contratar
-                        1. Hogar
-                        2. Auto
-                        3. Vida
-                    2. Eliminar
-                    3. Consultar
-                        1. Todos
-                        2. Hogar
-                        3. Auto
-                        4. Vida
+                1.-Seguros
+                
                 2. Salir
             """.trimIndent()
             )
