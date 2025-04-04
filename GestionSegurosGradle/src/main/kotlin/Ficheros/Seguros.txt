@@ -1,0 +1,2 @@
+100002;49988566K;30.0;324235;394.0;fdjsjgsdgj;2005;SeguroHogar
+400000;49988566K;30.0;fjdsjg;gasol;COCHE;TERCEROS;true;3;SeguroAuto
