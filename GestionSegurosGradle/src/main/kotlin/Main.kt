@@ -1,4 +1,3 @@
-package Main
 
 import service.GestorSeguros
 import data.IRepoSeguros
@@ -57,7 +56,6 @@ fun main() {
             TipoPerfil.ADMIN -> MenuAdmin(servUsuarios, servSeguros).mostrarMenu()
             TipoPerfil.GESTION -> MenuGestion(servSeguros).mostrarMenu()
             TipoPerfil.CONSULTA -> MenuConsulta(servSeguros).mostrarMenu()
-            else -> ui.mostrar("Perfil no reconocido") // no va a salir nunca pero lo dejo
         }
     } else {
         ui.mostrar("Autenticación fallida")
