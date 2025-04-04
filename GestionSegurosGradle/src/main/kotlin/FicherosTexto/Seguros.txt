@@ -1,2 +1,0 @@
-100000;12345678K;20.0;20000;20.0;dflskjfldsjg;2004;SeguroHogar
-400000;12345678A;20.0;rfdklsngds;gasolina;COCHE;todo riesgo;true;30;SeguroAuto

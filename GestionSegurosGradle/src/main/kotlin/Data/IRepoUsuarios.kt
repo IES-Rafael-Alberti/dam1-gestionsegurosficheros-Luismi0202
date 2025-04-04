@@ -1,7 +1,7 @@
-package Data
+package data
 
-import Domain.Usuario
-import EnumClasificatorias.TipoPerfil
+import model.Usuario
+import model.TipoPerfil
 
 interface IRepoUsuarios {
     fun agregarUsuario(usuario: Usuario): Boolean
@@ -10,4 +10,5 @@ interface IRepoUsuarios {
     fun eliminarUsuario(nombre: String): Boolean
     fun obtenerTodosUsuarios(): List<Usuario>
     fun obtenerUsuarioPerfil(perfil: TipoPerfil): List<Usuario>
+    fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean
 }

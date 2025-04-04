@@ -1,12 +1,14 @@
-package Service
+package service
 
-import Domain.Usuario
-
+import model.Usuario
+import model.TipoPerfil
 interface IServUsuarios {
-    fun autenticarUsuario(nombre: String, contrasena: String): Usuario?
-    fun crearUsuario(nombre: String, contrasena: String, perfil: String): Boolean
+    fun iniciarSesion(nombre: String, clave: String): TipoPerfil?
+    fun agregarUsuario(nombre: String, clave: String, perfil: TipoPerfil): Boolean
     fun eliminarUsuario(nombre: String): Boolean
-    fun cambiarContrasena(nombre: String, nuevaContrasena: String): Boolean
-    fun listarUsuarios(): List<Usuario>
+    fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean
+    fun buscarUsuario(nombre: String): Usuario?
+    fun consultarTodos()
+    fun consultarPorPerfil(perfil: TipoPerfil)
 
 }

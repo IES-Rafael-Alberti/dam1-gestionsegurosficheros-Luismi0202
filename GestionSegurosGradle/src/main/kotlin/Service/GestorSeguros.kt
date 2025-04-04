@@ -1,7 +1,7 @@
-package Service
+package service
 
-import Data.IRepoSeguros
-import Domain.Seguro
+import data.IRepoSeguros
+import model.Seguro
 
 class GestorSeguros(private val repoSeguros: IRepoSeguros) : IServSeguros {
     override fun contratarSeguro(seguro: Seguro): Boolean {

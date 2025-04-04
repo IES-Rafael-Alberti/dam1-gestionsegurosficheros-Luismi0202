@@ -1,6 +1,6 @@
-package Service
+package service
 
-import Domain.Seguro
+import model.Seguro
 
 interface IServSeguros {
     fun contratarSeguro(seguro: Seguro): Boolean

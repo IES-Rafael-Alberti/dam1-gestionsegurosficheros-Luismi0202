@@ -1,57 +1,56 @@
-package Service
+package service
 
-import Data.IRepoUsuarios
-import Domain.Usuario
-import EnumClasificatorias.TipoPerfil
+import data.IRepoUsuarios
+import model.TipoPerfil
+import model.Usuario
 
-class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
+class GestorUsuarios(
+    private val repoUsuarios: IRepoUsuarios,
+) : IServUsuarios {
 
-    override fun autenticarUsuario(nombre: String, contrasena: String): Usuario? {
-        val usuario = repoUsuarios.buscarUsuario(nombre)
-
-        return if (usuario != null && usuario.verificarClave(contrasena,usuario.contrasenia)) usuario else null
+    override fun iniciarSesion(nombre: String, clave: String): TipoPerfil? {
+        val usuario = repoUsuarios.buscarUsuario(nombre) ?: return null
+        return if (Utils.verificarClave(clave, usuario.contrasenia)) {
+            usuario.perfil
+        } else {
+            null
+        }
     }
 
-    override fun crearUsuario(nombre: String, contrasena: String, perfil: String): Boolean {
-        val perfilEnum = TipoPerfil.getPerfil(perfil)
-        if (perfilEnum == null) {
+    override fun agregarUsuario(nombre: String, clave: String, perfil: TipoPerfil): Boolean {
+        val claveEncriptada = Utils.encriptarClave(clave)
+        val nuevoUsuario = Usuario.crearUsuario(listOf(nombre,claveEncriptada,perfil.descripcion))
+
+        if(nuevoUsuario == null){
+            println("¡Error,usuario nulo!")
             return false
         }
-        val usuario = Usuario(nombre, contrasena, perfilEnum)
 
-        return if (repoUsuarios.agregarUsuario(usuario)) {
-            Usuario.usuariosCreados.add(usuario)
-            true
-        } else {
-            false
-        }
+        return repoUsuarios.agregarUsuario(nuevoUsuario)
     }
 
     override fun eliminarUsuario(nombre: String): Boolean {
-        val usuario = repoUsuarios.buscarUsuario(nombre)
+        return repoUsuarios.eliminarUsuario(nombre)
+    }
 
-        return if (usuario != null && repoUsuarios.eliminarUsuario(usuario)) {
-            Usuario.usuariosCreados.remove(usuario)
-            true
-        } else {
-            false
+    override fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean {
+        val nuevaClaveEncriptada = Utils.encriptarClave(nuevaClave)
+        return repoUsuarios.cambiarClave(usuario,nuevaClaveEncriptada)
+    }
+
+    override fun buscarUsuario(nombre: String): Usuario? {
+        return repoUsuarios.buscarUsuario(nombre)
+    }
+
+    override fun consultarTodos(){
+        for(usuario in repoUsuarios.obtenerTodosUsuarios()){
+            println(usuario)
         }
     }
 
-    override fun cambiarContrasena(nombre: String, nuevaContrasena: String): Boolean {
-        val usuario = repoUsuarios.buscarUsuario(nombre)
-
-        return if (usuario != null) {
-            usuario.cambiarClave(nuevaContrasena)
-            repoUsuarios.eliminarUsuario(usuario)
-            repoUsuarios.agregarUsuario(usuario)
-            true
-        } else {
-            false
+    override fun consultarPorPerfil(perfil: TipoPerfil){
+        for(usuario in repoUsuarios.obtenerUsuarioPerfil(perfil)){
+            println(usuario)
         }
-    }
-
-    override fun listarUsuarios(): List<Usuario> {
-        return repoUsuarios.obtenerTodosUsuarios()
     }
 }

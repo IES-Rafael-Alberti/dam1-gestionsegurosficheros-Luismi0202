@@ -1,13 +1,22 @@
-package Data
+package data
 
-import Domain.Usuario
-import EnumClasificatorias.TipoPerfil
+import model.Usuario
+import model.TipoPerfil
 
-class RepoUsuariosMem : IRepoUsuarios {
-    private val usuarios = mutableListOf<Usuario>()
+open class RepoUsuariosMem : IRepoUsuarios {
+    protected val usuarios = mutableListOf<Usuario>()
 
     override fun agregarUsuario(usuario: Usuario): Boolean {
-        return usuarios.add(usuario)
+        var agregado = false
+
+        if(buscarUsuario(usuario.nombre) != null){
+            println("El usuario introducido ya existe.")
+        }
+        else{
+            usuarios.add(usuario)
+            agregado = true
+        }
+        return agregado
     }
 
     override fun buscarUsuario(nombre: String): Usuario? {
@@ -33,5 +42,18 @@ class RepoUsuariosMem : IRepoUsuarios {
 
     override fun obtenerUsuarioPerfil(perfil: TipoPerfil): List<Usuario> {
         return usuarios.filter { it.perfil == perfil }
+    }
+
+    override fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean {
+        var cambiada = false
+
+        try {
+            usuario.cambiarClave(nuevaClave)
+            cambiada = true
+        }catch(e:Exception){
+            cambiada = false
+            println("¡ERROR! No se ha podido cambiar la contraseña Detalle: $e")
+        }
+        return cambiada
     }
 }

@@ -1,9 +1,9 @@
-package Data
+package data
 
-import Domain.Seguro
+import model.Seguro
 
-class RepoSegurosMem : IRepoSeguros {
-    private val seguros = mutableListOf<Seguro>()
+open class RepoSegurosMem : IRepoSeguros {
+    protected val seguros = mutableListOf<Seguro>()
 
     override fun agregar(seguro: Seguro): Boolean {
         return seguros.add(seguro)

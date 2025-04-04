@@ -1,6 +1,6 @@
-package Data
+package data
 
-import Domain.Seguro
+import model.Seguro
 
 interface IRepoSeguros {
     fun agregar(seguro: Seguro): Boolean
