@@ -6,6 +6,10 @@ Había creado otra rama hace bastante porque tenía el código bastante desestru
 
 Aquí tenéis el enlace al enunciado: [Enunciado de la práctica PRO2425 - Gestión de Seguros](https://github.com/dcanoIESRafaelAlberti/PRO2425_Seguros/blob/main/README.md)
 
+# 04/04/2025 NUEVAS ACLARACIONES
+
+He copiado y pegado el contenido de la segunda rama en la rama main, el contenido de la rama main es ahora el bueno.
+
 * Os dejo un enlace para yo poder modificarla estos días y así que la tengáis actualizada.
 
 * La estructura y el objetivo de la práctica se mantendrá, pero quiero mirarla un poco más por si cambio algún detalle, y sobre todo para explicarla mejor.
